@@ -4,11 +4,13 @@ const cart = ["shoes", "pants", "kurta"];
 
 const promise = createOrder(cart); // orderId
 
-promise.then(function(){
-    proceeedToPayment(orderId);
+promise.then(function(orderId){
+    proceedToPayment(orderId);
+}).catch(function(err){
+    console.log(err.message);
 })
 
-/// producer
+////////////// producer
 
 function createOrder(cart){
 
@@ -17,11 +19,27 @@ function createOrder(cart){
         /// validateCart
         //orderId
         if(!validateCart(cart)){
+            const err = new Error("Cart is empty");
             reject(err);
         }
 
         //logic for createOrder
         const orderId = "12345";
-        if(orderId){resolve(orderId);}
+        if(orderId){
+            resolve(orderId);
+        }
     });
+
+    return pr; // Return the promise
+}
+
+function validateCart(cart){
+    if(cart.length === 0){
+        return false;
+    }
+    return true;
+}
+
+function proceedToPayment(orderId){
+    console.log(`Proceeding to payment for order ID: ${orderId}`);
 }
