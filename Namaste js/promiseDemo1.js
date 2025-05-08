@@ -1,13 +1,11 @@
 // creating promise, chaining & error handling
 
-const cart = ["shoes", "pants", "kurta"];
+const cart = [];
 
 const promise = createOrder(cart); // orderId
 
 promise.then(function(orderId){
     proceedToPayment(orderId);
-}).catch(function(err){
-    console.log(err.message);
 })
 
 ////////////// producer
@@ -19,8 +17,8 @@ function createOrder(cart){
         /// validateCart
         //orderId
         if(!validateCart(cart)){
-            const err = new Error("Cart is empty");
-            reject(err);
+        
+            reject("Cart is empty");
         }
 
         //logic for createOrder
